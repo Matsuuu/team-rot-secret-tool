@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <title>Team Rot Secret Tool</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: 500ms linear;
+    }
+
+    div {
+      background: #0d1117;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    body[party] div {
+      background: red;
+      animation: party;
+      animation-duration: 9001ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    @keyframes party {
+      from {
+        filter: hue-rotate(0deg);
+      }
+      to {
+        filter: hue-rotate(4200deg);
+      }
+    }
+  </style>
+  <body>
+    <div></div>
+    <img
+      src="https://avatars.githubusercontent.com/u/5388424?s=400&u=47f79dd2bef61be735c8ba7ab4bbf955e9b2d06a&v=4"
+    />
+    <button>Activate partymode (Epilepsy warning)</button>
+    <div id="player"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      function onYouTubeIframeAPIReady() {
+        const player = new YT.Player("player", {
+          height: "0",
+          width: "0",
+          videoId: "fvxWpQTjJ48",
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+
+      function onPlayerReady(e) {
+        e.target.playVideo();
+      }
+
+      function onPlayerStateChange(e) {}
+
+      const img = document.querySelector("img");
+      setInterval(() => {
+        const h = window.innerHeight;
+        const w = window.innerWidth;
+
+        img.style.top = Math.random() * h + "px";
+        img.style.left = Math.random() * w + "px";
+      }, 500);
+      document.querySelector("button").addEventListener("click", () => {
+        document.body.setAttribute("party", "");
+        const div = document.querySelector("div");
+        console.log(div);
+        setInterval(() => {
+          div.style.background = r();
+        }, 1000);
+        const r = () => {
+          return (
+            "#" + Math.floor(Math.random() * (999999 - 777777 + 1) + 777777)
+          );
+        };
+      });
+    </script>
+  </body>
+</html>
